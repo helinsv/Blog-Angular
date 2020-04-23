@@ -18,5 +18,5 @@
                now length are {{form.get('password').errors.minlength.actualLength}}</small>
         </div>
     </div>
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Submit</button>
+    <button type="submit" [disabled]="form.invalid || submitted" class=" btn btn-primary ">Submit</button>
 </form>
