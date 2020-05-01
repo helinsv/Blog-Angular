@@ -16,3 +16,6 @@ export interface Post {
   date: Date;
 }
 
+export interface FbAuthResponse {
+  name: string;
+}
