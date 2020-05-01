@@ -6,9 +6,11 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardPageComponent } from '../admin/dashboard-page/dashboard-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
-import { ReactiveFormsModule, FormsModule} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthService } from './shared/servises/auth.service';
 import { SharedModule } from '../shared/shared.module';
+import { CanActivateGuard } from './shared/servises/can.activate.guard';
+
 
 @NgModule({
   declarations: [
@@ -24,12 +26,13 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forChild([
-      { path: '', component: AdminLayoutComponent, children: [
+      {
+        path: '', component: AdminLayoutComponent, children: [
           { path: '', pathMatch: 'full', redirectTo: '/admin/login' },
           { path: 'login', component: LoginPageComponent },
-          { path: 'dashboard', component: DashboardPageComponent },
-          { path: 'post/:id/edit', component: EditPageComponent },
-          { path: 'create', component: CreatePageComponent }
+          { path: 'dashboard', component: DashboardPageComponent, canActivate: [CanActivateGuard] },
+          { path: 'post/:id/edit', component: EditPageComponent, canActivate: [CanActivateGuard] },
+          { path: 'create', component: CreatePageComponent, canActivate: [CanActivateGuard] }
         ]
       }
     ]),
@@ -39,7 +42,7 @@ import { SharedModule } from '../shared/shared.module';
     RouterModule
   ],
   providers: [
-    AuthService
+    AuthService, CanActivateGuard
   ]
 })
 export class AdminModule { }

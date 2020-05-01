@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { User } from '../../shared/interfaces';
 import { AuthService } from '../shared/servises/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,19 +12,27 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   form: FormGroup;
   submitted = false;
+  message: string;
   //user: User[];
-  constructor( private authService: AuthService, private router: Router ) { }
+  constructor(public authService: AuthService, private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
+      if (params['loginAgain']) {
+        this.message = 'Please log in to admin panel';
+      }
+    })
+
     this.form = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
-      password: new FormControl('', [Validators.minLength(3), Validators.required]),
+      password: new FormControl('', [Validators.minLength(6), Validators.required]),
     })
   }
 
   submit() {
     if (this.form.invalid) {
-      return;
+      return
     }
 
     this.submitted = true;
@@ -38,12 +46,10 @@ export class LoginPageComponent implements OnInit {
       this.form.reset();
       this.router.navigate(['/admin', 'dashboard']);
       this.submitted = false;
+    }, () => {
+      this.submitted = false;
     })
-
     //console.log(user);
-
-
-
   }
 
 
