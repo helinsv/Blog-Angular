@@ -7,7 +7,6 @@ import { DashboardPageComponent } from '../admin/dashboard-page/dashboard-page.c
 import { EditPageComponent } from './edit-page/edit-page.component';
 import { CreatePageComponent } from './create-page/create-page.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AuthService } from './shared/servises/auth.service';
 import { SharedModule } from '../shared/shared.module';
 import { CanActivateGuard } from './shared/servises/can.activate.guard';
 
@@ -42,7 +41,7 @@ import { CanActivateGuard } from './shared/servises/can.activate.guard';
     RouterModule
   ],
   providers: [
-    AuthService, CanActivateGuard
+    CanActivateGuard
   ]
 })
 export class AdminModule { }

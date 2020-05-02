@@ -8,7 +8,6 @@ import { PostService } from 'src/app/shared/components/post.service';
   styleUrls: ['./create-page.component.scss']
 })
 export class CreatePageComponent implements OnInit {
-
   constructor(private postService: PostService) { }
 
   form: FormGroup;
@@ -21,6 +20,8 @@ export class CreatePageComponent implements OnInit {
       text: new FormControl('', [Validators.required, Validators.minLength(3)])
     })
   }
+
+
 
   submit() {
     if (this.form.invalid) {
