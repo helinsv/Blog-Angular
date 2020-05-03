@@ -9,7 +9,7 @@ import { CreatePageComponent } from './create-page/create-page.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CanActivateGuard } from './shared/servises/can.activate.guard';
-
+import { SearchPostPipe } from './shared/search-post.pipe';
 
 @NgModule({
   declarations: [
@@ -17,13 +17,15 @@ import { CanActivateGuard } from './shared/servises/can.activate.guard';
     LoginPageComponent,
     DashboardPageComponent,
     CreatePageComponent,
-    EditPageComponent
+    EditPageComponent,
+    SearchPostPipe,
   ],
   imports: [
     SharedModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+
     RouterModule.forChild([
       {
         path: '', component: AdminLayoutComponent, children: [
