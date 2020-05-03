@@ -23,7 +23,7 @@
 
       </quill-editor>
     </div>
-    <button type="submit" [disabled]="!form.valid">
+    <button type="submit" [disabled]="!form.valid || submitted">
       Refresh
     </button>
   </form>
