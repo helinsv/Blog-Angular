@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
-  posts: Post;
+  posts: Post[];
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +31,17 @@ export class PostService {
             id: key,
             date: new Date(response[key].date)
           }))
+      }));
+  }
+
+  getById(id: string): Observable<Post> {
+    return this.http.get<Post>(`${environment.fbDbUrl}/posts/${id}.json`)
+      .pipe(map((post: Post) => {
+        return {
+          ...post,
+          id,
+          date: new Date(post.date)
+        }
       }));
   }
 

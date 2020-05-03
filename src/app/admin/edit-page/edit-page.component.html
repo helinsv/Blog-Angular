@@ -1,1 +1,33 @@
-<p>edit-page works!</p>
+<div *ngIf="form; else loadind">
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-control" [ngClass]="{'invalid': form.get('title').invalid && form.get('title').touched}">
+      <label for="title">Title:</label>
+      <input formControlName="title" type="text" id="title">
+      <div class="validation" *ngIf="form.get('title').invalid && form.get('title').touched">
+        <small *ngIf="form.get('title').errors.required">Required field</small>
+        <small *ngIf="form.get('title').errors.minlength">Invalid title</small>
+      </div>
+    </div>
+    <div class="form-control" [ngClass]="{'invalid': form.get('author').invalid && form.get('author').touched}">
+      <label for="author">Author:</label>
+      <input formControlName="author" type="text" id="author">
+      <div class="validation" *ngIf="form.get('title').invalid && form.get('author').touched">
+        <small *ngIf="form.get('author').errors.required">Required field</small>
+        <small *ngIf="form.get('author').errors.minlength">Invalid author </small>
+      </div>
+    </div>
+    <div class="form-control">
+      <label>Content</label>
+      <quill-editor formControlName="text">
+
+      </quill-editor>
+    </div>
+    <button type="submit" [disabled]="!form.valid">
+      Refresh
+    </button>
+  </form>
+</div>
+<ng-template #loadind>
+  Loading...
+</ng-template>

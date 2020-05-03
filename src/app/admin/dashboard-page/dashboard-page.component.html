@@ -19,8 +19,8 @@
         <td>{{post.title}}</td>
         <td>{{post.date | date}}</td>
         <td>
-          <button class="btn btn-link open" [routerLink]="['/admin','/post', post.id, 'edit']"
-            routerLinkActive="router-link-active">Open</button>
+          <button class="btn btn-link open" [routerLink]="['/admin','post',post.id,'edit']"
+            routerLinkActive="router-link-active">Edit</button>
           <a (click)="removePost(post.id)">Remove</a>
         </td>
       </tr>
