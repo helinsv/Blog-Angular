@@ -3,6 +3,7 @@ import { AuthService } from '../shared/servises/auth.service';
 import { PostService } from 'src/app/shared/components/post.service';
 import { Post } from 'src/app/shared/interfaces';
 import { Subscription } from 'rxjs';
+import { AlertService } from '../shared/servises/alert.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -16,7 +17,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   dSub: Subscription;
   search: string = '';
 
-  constructor(private auth: AuthService, private postService: PostService) { }
+  constructor(private auth: AuthService, private postService: PostService, private alertService: AlertService) { }
   ngOnDestroy() {
     if (this.pSub) {
       this.pSub.unsubscribe();
@@ -39,7 +40,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   removePost(id: string) {
     this.dSub = this.postService.removePost(id).subscribe(() => {
-      this.posts = this.posts.filter(p => p.id !== id)
+      this.posts = this.posts.filter(p => p.id !== id);
+      this.alertService.danger('Post deleted');
     })
 
   }

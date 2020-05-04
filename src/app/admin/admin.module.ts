@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ROUTER_INITIALIZER } from '@angular/router';
-import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.component';
+import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { DashboardPageComponent } from '../admin/dashboard-page/dashboard-page.component';
 import { EditPageComponent } from './edit-page/edit-page.component';
@@ -10,6 +10,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CanActivateGuard } from './shared/servises/can.activate.guard';
 import { SearchPostPipe } from './shared/search-post.pipe';
+import { AlertComponent } from './shared/components/alert/alert.component';
+import { AlertService } from "./shared/servises/alert.service";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { SearchPostPipe } from './shared/search-post.pipe';
     CreatePageComponent,
     EditPageComponent,
     SearchPostPipe,
+    AlertComponent,
   ],
   imports: [
     SharedModule,
@@ -43,7 +46,7 @@ import { SearchPostPipe } from './shared/search-post.pipe';
     RouterModule
   ],
   providers: [
-    CanActivateGuard
+    CanActivateGuard, AlertService
   ]
 })
 export class AdminModule { }
