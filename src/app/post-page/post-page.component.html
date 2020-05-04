@@ -1,20 +1,17 @@
-<div class="post">
-    <div class="header">
-        <h1>Post title</h1>
-        <button class="btn btn-link" [routerLink]="['/']">To home</button>
-    </div>
-    <div class="info">
-        <strong>Autor </strong>
-        <small>12.09.2019</small>
-    </div>
-    <div>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum distinctio ducimus consectetur deserunt dolor natus, aperiam itaque soluta ratione veniam! Corporis at asperiores explicabo laborum qui autem quis ipsam earum dicta odit magnam
-            eaque ex quidem fugit voluptates culpa nihil recusandae, incidunt, nesciunt quam odio? Consequuntur id cumque molestiae quas.</p>
-
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum distinctio ducimus consectetur deserunt dolor natus, aperiam itaque soluta ratione veniam! Corporis at asperiores explicabo laborum qui autem quis ipsam earum dicta odit magnam
-            eaque ex quidem fugit voluptates culpa nihil recusandae, incidunt, nesciunt quam odio? Consequuntur id cumque molestiae quas.</p>
-
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum distinctio ducimus consectetur deserunt dolor natus, aperiam itaque soluta ratione veniam! Corporis at asperiores explicabo laborum qui autem quis ipsam earum dicta odit magnam
-            eaque ex quidem fugit voluptates culpa nihil recusandae, incidunt, nesciunt quam odio? Consequuntur id cumque molestiae quas.</p>
-    </div>
+<div class="post" *ngIf="post; else loading">
+  <div class="header">
+    <h1>{{post.title}}</h1>
+    <button class="btn btn-link" [routerLink]="['/']">To home</button>
+  </div>
+  <div class="info">
+    <strong>{{post.author}}</strong>
+    <small>{{post.date| date}}</small>
+  </div>
+  <div>
+    <quill-view-html [content]="post.text"></quill-view-html>
+  </div>
 </div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>
