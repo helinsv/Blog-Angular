@@ -11,11 +11,11 @@ import { Observable } from 'rxjs';
 export class HomePageComponent implements OnInit {
   posts$: Observable<Post[]>;
 
-
   constructor(private postService: PostService) { }
 
   ngOnInit() {
     this.posts$ = this.postService.getPosts();
   }
+
 
 }
